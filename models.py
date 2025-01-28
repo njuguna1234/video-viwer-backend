@@ -8,3 +8,10 @@ class Video(db.Model):
 
     def __repr__(self):
         return f'<Video {self.title}>'
+
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    video_id = db.Column(db.Integer, db.ForeignKey('video.id'), nullable=False)
+
+    # Relationship for easier access to video details
+    video = db.relationship('Video', backref='favorites')
